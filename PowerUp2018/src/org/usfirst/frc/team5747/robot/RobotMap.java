@@ -16,13 +16,14 @@ package org.usfirst.frc.team5747.robot;
 public class RobotMap {
 	public interface CAN
 	{
-		public static final int ELEVATOR1 = 6; 
-		public static final int ELEVATOR2 = 7;
+		public static final int ELEVATOR_1 = 6; 
+		public static final int ELEVATOR_2 = 7;
 	}
 	public interface DIO
 	{
 		public static final int ELEVATOR_MIN = 3;
 		public static final int ELEVATOR_MAX = 4;
-		public static final int ELEVATOR_ENCODER = 5;
+		public static final int ELEVATOR_ENCODER_A = 5;
+		public static final int ELEVATOR_ENCODER_B = 6;
 	}
 }
