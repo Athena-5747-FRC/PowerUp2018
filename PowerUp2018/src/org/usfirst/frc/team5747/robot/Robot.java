@@ -7,7 +7,10 @@
 
 package org.usfirst.frc.team5747.robot;
 
+import org.usfirst.frc.team5747.robot.subsystems.FlipCube;
+import org.usfirst.frc.team5747.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5747.robot.subsystems.Elevator;
+import org.usfirst.frc.team5747.robot.subsystems.IntakeCube;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.spikes2212.utils.DoubleSpeedcontroller;
@@ -28,6 +31,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
+	public static IntakeCube intakecube;
+	public static FlipCube flipcube;
+	public static Drivetrain drivetrain;
 	public static Elevator elevator;
 	public static OI oi;
 
@@ -40,11 +46,17 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		drivetrain = new Drivetrain(
+				new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.DRIVE_LEFT_1),
+						new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.DRIVE_LEFT_2), new WPI_TalonSRX(RobotMap.CAN.DRIVE_LEFT_3))),
+				new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.DRIVE_RIGHT_1),
+						(new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.DRIVE_RIGHT_2), new WPI_TalonSRX(RobotMap.CAN.DRIVE_RIGHT_3)))));
 		elevator = new Elevator(
-				new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_1),
-						new WPI_TalonSRX(RobotMap.CAN.ELEVATOR_2)),
+				new WPI_TalonSRX(RobotMap.CAN.ELEVATOR),
 				new DigitalInput(RobotMap.DIO.ELEVATOR_MIN), new DigitalInput(RobotMap.DIO.ELEVATOR_MAX),
 				new Encoder(RobotMap.DIO.ELEVATOR_ENCODER_A, RobotMap.DIO.ELEVATOR_ENCODER_B));
+		flipcube = new FlipCube(new WPI_TalonSRX(RobotMap.CAN.FLIP));
+		intakecube = new IntakeCube(new WPI_TalonSRX(RobotMap.CAN.INTAKE_LEFT), new WPI_TalonSRX(RobotMap.CAN.INTAKE_RIGHT));
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);

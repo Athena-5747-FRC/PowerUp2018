@@ -1,6 +1,9 @@
 package org.usfirst.frc.team5747.robot.subsystems;
 
+import org.usfirst.frc.team5747.robot.Robot;
+
 import com.spikes2212.genericsubsystems.LimitedSubsystem;
+import com.spikes2212.genericsubsystems.commands.MonitoredMoveLimitedSubsystem;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -11,10 +14,10 @@ import edu.wpi.first.wpilibj.SpeedController;
  *
  */
 public class Elevator extends LimitedSubsystem {
-
-    SpeedController motor;
-    DigitalInput min, max;
-    Encoder encoder;
+	public final double ELEVATOR_SPEED = 0.7;
+    private SpeedController motor;
+    private DigitalInput min, max;
+    private Encoder encoder;
     public Elevator(SpeedController motor,DigitalInput min,DigitalInput max,Encoder encoder)
     {
     	this.motor = motor; //if motor speed is positive - Up (to max) if not, invert the motor.
@@ -23,8 +26,7 @@ public class Elevator extends LimitedSubsystem {
     	this.encoder = encoder;
     }
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+    	
     }
 
 	@Override
