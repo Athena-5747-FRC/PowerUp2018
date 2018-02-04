@@ -4,6 +4,7 @@ import org.usfirst.frc.team5747.robot.Robot;
 
 import com.spikes2212.genericsubsystems.LimitedSubsystem;
 import com.spikes2212.genericsubsystems.commands.MonitoredMoveLimitedSubsystem;
+import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -26,7 +27,7 @@ public class Elevator extends LimitedSubsystem {
     	this.encoder = encoder;
     }
     public void initDefaultCommand() {
-    	
+    	setDefaultCommand(new MoveLimitedSubsystem(Robot.elevator, Robot.oi::getElevator));
     }
 
 	@Override
