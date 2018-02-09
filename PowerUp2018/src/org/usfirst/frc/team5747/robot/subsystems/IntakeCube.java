@@ -11,12 +11,10 @@ import edu.wpi.first.wpilibj.SpeedController;
 public class IntakeCube extends LimitedSubsystem {
 	public final double INTAKE = 0.7;
 	public final double OUTTAKE = -0.7;
-	private SpeedController rightMotor;
-	private SpeedController leftMotor;
-	public IntakeCube (SpeedController rightMotor, SpeedController leftMotor)
+	private SpeedController motor;
+	public IntakeCube (SpeedController motor)
 	{
-		this.rightMotor = rightMotor;
-		this.leftMotor = leftMotor;
+		this.motor = motor;
 		
 	}
 	public void initDefaultCommand() {
@@ -40,8 +38,7 @@ public class IntakeCube extends LimitedSubsystem {
 	}
 	@Override
 	protected void move(double speed) {
-		rightMotor.set(speed);
-		leftMotor.set(speed);
+		motor.set(speed);
 		
 	}
 }

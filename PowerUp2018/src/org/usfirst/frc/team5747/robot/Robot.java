@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
 				new DigitalInput(RobotMap.DIO.ELEVATOR_MIN), new DigitalInput(RobotMap.DIO.ELEVATOR_MAX),
 				new Encoder(RobotMap.DIO.ELEVATOR_ENCODER_A, RobotMap.DIO.ELEVATOR_ENCODER_B));
 		flipcube = new FlipCube(new WPI_TalonSRX(RobotMap.CAN.FLIP));
-		intakecube = new IntakeCube(new WPI_TalonSRX(RobotMap.CAN.INTAKE_LEFT), new WPI_TalonSRX(RobotMap.CAN.INTAKE_RIGHT));
+		intakecube = new IntakeCube(new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.INTAKE_RIGHT), new WPI_TalonSRX(RobotMap.CAN.INTAKE_LEFT)));
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
