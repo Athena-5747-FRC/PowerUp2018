@@ -7,9 +7,9 @@
 
 package org.usfirst.frc.team5747.robot;
 
-import org.usfirst.frc.team5747.robot.subsystems.FlipCube;
 import org.usfirst.frc.team5747.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5747.robot.subsystems.Elevator;
+import org.usfirst.frc.team5747.robot.subsystems.FlipCube;
 import org.usfirst.frc.team5747.robot.subsystems.IntakeCube;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;

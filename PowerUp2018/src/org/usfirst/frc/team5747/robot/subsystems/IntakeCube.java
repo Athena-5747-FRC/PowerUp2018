@@ -1,9 +1,6 @@
 package org.usfirst.frc.team5747.robot.subsystems;
 
-import org.usfirst.frc.team5747.robot.Robot;
-
-import com.spikes2212.genericsubsystems.drivetrains.TankDrivetrain;
-import com.spikes2212.genericsubsystems.drivetrains.commands.DriveArcade;
+import com.spikes2212.genericsubsystems.LimitedSubsystem;
 
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -11,37 +8,41 @@ import edu.wpi.first.wpilibj.SpeedController;
 /**
  *
  */
-public class IntakeCube extends TankDrivetrain {
-	
-	private SpeedController rightMotor,leftMotor;
-	
-	public IntakeCube (SpeedController leftMotor, SpeedController rightMotor)
+public class IntakeCube extends LimitedSubsystem {
+	public final double INTAKE = 0.7;
+	public final double OUTTAKE = -0.7;
+	private SpeedController rightMotor;
+	private SpeedController leftMotor;
+	public IntakeCube (SpeedController rightMotor, SpeedController leftMotor)
 	{
 		this.rightMotor = rightMotor;
 		this.leftMotor = leftMotor;
-		this.leftMotor.setInverted(true);
+		
 	}
-    public void initDefaultCommand() {
-    	setDefaultCommand(new DriveArcade(Robot.intakecube, Robot.oi::getIntakeLeft, Robot.oi::getIntakeRight));
-    }
+	public void initDefaultCommand() {
+    	//None.
+}
 
 	@Override
-	public PIDSource getLeftPIDSource() {
+	public PIDSource getPIDSource() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public PIDSource getRightPIDSource() {
+	public boolean isMax() {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 	@Override
-	public void setLeft(double speedLeft) {
-		leftMotor.set(speedLeft);
+	public boolean isMin() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	@Override
-	public void setRight(double speedRight) {
-		rightMotor.set(speedRight);
+	protected void move(double speed) {
+		rightMotor.set(speed);
+		leftMotor.set(speed);
+		
 	}
 }
 

@@ -3,6 +3,7 @@ package org.usfirst.frc.team5747.robot;
 import org.usfirst.frc.team5747.util.XboXUID;
 
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
+import com.spikes2212.genericsubsystems.drivetrains.commands.DriveArcade;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 
@@ -13,13 +14,19 @@ import edu.wpi.first.wpilibj.buttons.Button;
 public class OI {
 	private XboXUID driver = new XboXUID(0);
 	private XboXUID operator = new XboXUID(1);
-	private Button openIntake;
+	private Button FlipIntake;
+	private Button Intake;
+	private Button Outtake;
 	public OI() {
-		openIntake = operator.getYellowButton();
+		FlipIntake = operator.getYellowButton();
+		Intake = operator.getGreenButton();
+		Outtake = operator.getRedButton();
 		operatorButtons();
 	}
 	public void operatorButtons() {
-		openIntake.whileHeld(new MoveLimitedSubsystem(Robot.flipcube, Robot.flipcube.FLIP_SPEED));
+		FlipIntake.whileHeld(new MoveLimitedSubsystem(Robot.flipcube, Robot.flipcube.FLIP_SPEED));
+		Intake.whileHeld(new MoveLimitedSubsystem(Robot.intakecube, Robot.intakecube.INTAKE));
+		Outtake.whileHeld(new MoveLimitedSubsystem(Robot.intakecube, Robot.intakecube.OUTTAKE));
 	}
 
 
@@ -33,13 +40,6 @@ public class OI {
 	}
 	public double getElevator() {
 		return  Math.pow(operator.getLeftY(), 3);
-	}
-	public double getIntakeRight() {
-		return -Math.pow(operator.getRightIntake(), 3);
-	}
-
-	public double getIntakeLeft() {
-		return (Math.pow(operator.getLeftIntake(), 3));
 	}
 	
 
