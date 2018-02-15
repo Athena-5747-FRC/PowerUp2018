@@ -95,12 +95,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
-
-		
-		  String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		  switch(autoSelected) { case "My Auto": autonomousCommand = new
-		  CubeToSwitchOrScaleAutoR(); break; case "Default Auto": default: autonomousCommand = new
-		  CubeToSwitchOrScaleAutoR(); break; }
 		 
 
 		// schedule the autonomous command (example)
