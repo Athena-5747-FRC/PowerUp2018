@@ -62,7 +62,7 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		chooser.addObject("Switch/Scale Right", new CubeToSwitchOrScaleAutoR());
 		chooser.addDefault("Switch/Scale Left", new CubeToSwitchOrScaleAutoL());
-		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData(chooser);
 	}
 
 	/**
