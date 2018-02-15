@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team5747.robot;
 
+import org.usfirst.frc.team5747.robot.commands.commandgroups.CubeToSwitchOrScaleAutoL;
+import org.usfirst.frc.team5747.robot.commands.commandgroups.CubeToSwitchOrScaleAutoR;
 import org.usfirst.frc.team5747.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5747.robot.subsystems.Elevator;
 import org.usfirst.frc.team5747.robot.subsystems.FlipCube;
@@ -50,15 +52,16 @@ public class Robot extends TimedRobot {
 				new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.DRIVE_LEFT_1),
 						new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.DRIVE_LEFT_2), new WPI_TalonSRX(RobotMap.CAN.DRIVE_LEFT_3))),
 				new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.DRIVE_RIGHT_1),
-						(new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.DRIVE_RIGHT_2), new WPI_TalonSRX(RobotMap.CAN.DRIVE_RIGHT_3)))));
+						(new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.DRIVE_RIGHT_2), new WPI_TalonSRX(RobotMap.CAN.DRIVE_RIGHT_3)))), new Encoder(RobotMap.DIO.DRIVETRAIN1_ENCODER_A, RobotMap.DIO.DRIVETRAIN1_ENCODER_B), new Encoder(RobotMap.DIO.DRIVETRAIN2_ENCODER_A, RobotMap.DIO.DRIVETRAIN2_ENCODER_B));
 		elevator = new Elevator(
 				new WPI_TalonSRX(RobotMap.CAN.ELEVATOR),
 				new DigitalInput(RobotMap.DIO.ELEVATOR_MIN), new DigitalInput(RobotMap.DIO.ELEVATOR_MAX),
 				new Encoder(RobotMap.DIO.ELEVATOR_ENCODER_A, RobotMap.DIO.ELEVATOR_ENCODER_B));
 		flipcube = new FlipCube(new WPI_TalonSRX(RobotMap.CAN.FLIP));
-		intakecube = new IntakeCube(new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.INTAKE_RIGHT), new WPI_TalonSRX(RobotMap.CAN.INTAKE_LEFT)));
+		intakecube = new IntakeCube(new WPI_TalonSRX(RobotMap.CAN.INTAKE_LEFT), new WPI_TalonSRX(RobotMap.CAN.INTAKE_RIGHT));
 		oi = new OI();
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		chooser.addObject("Switch/Scale Right", new CubeToSwitchOrScaleAutoR());
+		chooser.addDefault("Switch/Scale Left", new CubeToSwitchOrScaleAutoL());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 
@@ -93,12 +96,12 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		 * switch(autoSelected) { case "My Auto": autonomousCommand = new
-		 * MyAutoCommand(); break; case "Default Auto": default: autonomousCommand = new
-		 * ExampleCommand(); break; }
-		 */
+		
+		  String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		  switch(autoSelected) { case "My Auto": autonomousCommand = new
+		  CubeToSwitchOrScaleAutoR(); break; case "Default Auto": default: autonomousCommand = new
+		  CubeToSwitchOrScaleAutoR(); break; }
+		 
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {

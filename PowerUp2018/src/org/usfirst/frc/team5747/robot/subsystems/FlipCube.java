@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.SpeedController;
  *
  */
 public class FlipCube extends LimitedSubsystem {
-	public final double FLIP_SPEED = 0.7;
+	public static final double FLIP_SPEED = 0.7;
     private SpeedController motor;
     
     public FlipCube (SpeedController motor)

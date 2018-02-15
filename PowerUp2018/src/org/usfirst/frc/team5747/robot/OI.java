@@ -1,5 +1,8 @@
 package org.usfirst.frc.team5747.robot;
 
+import org.usfirst.frc.team5747.robot.subsystems.Elevator;
+import org.usfirst.frc.team5747.robot.subsystems.FlipCube;
+import org.usfirst.frc.team5747.robot.subsystems.IntakeCube;
 import org.usfirst.frc.team5747.util.XboXUID;
 
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
@@ -15,22 +18,25 @@ public class OI {
 	private Button FlipIntake;
 	private Button Intake;
 	private Button Outtake;
+	private Button Holdinair;
 	public OI() {
-		FlipIntake = operator.getYellowButton();
-		Intake = operator.getGreenButton();
-		Outtake = operator.getRedButton();
 		operatorButtons();
 	}
 	public void operatorButtons() {
-		FlipIntake.whileHeld(new MoveLimitedSubsystem(Robot.flipcube, Robot.flipcube.FLIP_SPEED));
-		Intake.whileHeld(new MoveLimitedSubsystem(Robot.intakecube, Robot.intakecube.INTAKE));
-		Outtake.whileHeld(new MoveLimitedSubsystem(Robot.intakecube, Robot.intakecube.OUTTAKE));
+		FlipIntake = operator.getYellowButton();
+		Intake = operator.getGreenButton();
+		Outtake = operator.getRedButton();
+		Holdinair = operator.getBlueButton();
+		FlipIntake.whileHeld(new MoveLimitedSubsystem(Robot.flipcube, FlipCube.FLIP_SPEED));
+		Intake.whileHeld(new MoveLimitedSubsystem(Robot.intakecube, IntakeCube.INTAKE));
+		Outtake.whileHeld(new MoveLimitedSubsystem(Robot.intakecube, IntakeCube.OUTTAKE));
+		Holdinair.toggleWhenPressed(new MoveLimitedSubsystem(Robot.elevator, Elevator.ELEVATOR_SPEED));
 	}
 
 
 
 	public double getForwardDriver() {
-		return  Math.pow(driver.getLeftY(), 3);
+		return  -Math.pow(driver.getLeftY(), 3);
 	}
 
 	public double getRotationDriver() {

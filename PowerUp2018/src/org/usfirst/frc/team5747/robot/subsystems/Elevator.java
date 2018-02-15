@@ -3,7 +3,6 @@ package org.usfirst.frc.team5747.robot.subsystems;
 import org.usfirst.frc.team5747.robot.Robot;
 
 import com.spikes2212.genericsubsystems.LimitedSubsystem;
-import com.spikes2212.genericsubsystems.commands.MonitoredMoveLimitedSubsystem;
 import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -15,7 +14,7 @@ import edu.wpi.first.wpilibj.SpeedController;
  *
  */
 public class Elevator extends LimitedSubsystem {
-	public final double ELEVATOR_SPEED = 0.7;
+	public static final double ELEVATOR_SPEED =-0.1;
     private SpeedController motor;
     private DigitalInput min, max;
     private Encoder encoder;
@@ -32,7 +31,7 @@ public class Elevator extends LimitedSubsystem {
 
 	@Override
 	public PIDSource getPIDSource() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -51,5 +50,11 @@ public class Elevator extends LimitedSubsystem {
 		motor.set(speed);
 		
 	}
+	
+	public int getEncoderValue()
+	{
+		return encoder.get();
+		
+	} 
 }
 
