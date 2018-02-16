@@ -7,8 +7,10 @@
 
 package org.usfirst.frc.team5747.robot;
 
-import org.usfirst.frc.team5747.robot.commands.commandgroups.CubeToSwitchOrScaleAutoL;
-import org.usfirst.frc.team5747.robot.commands.commandgroups.CubeToSwitchOrScaleAutoR;
+import org.usfirst.frc.team5747.robot.commands.commandgroups.ScaleLeft;
+import org.usfirst.frc.team5747.robot.commands.commandgroups.ScaleRight;
+import org.usfirst.frc.team5747.robot.commands.commandgroups.SwitchLeft;
+import org.usfirst.frc.team5747.robot.commands.commandgroups.SwitchRight;
 import org.usfirst.frc.team5747.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5747.robot.subsystems.Elevator;
 import org.usfirst.frc.team5747.robot.subsystems.FlipCube;
@@ -60,8 +62,10 @@ public class Robot extends TimedRobot {
 		flipcube = new FlipCube(new WPI_TalonSRX(RobotMap.CAN.FLIP));
 		intakecube = new IntakeCube(new WPI_TalonSRX(RobotMap.CAN.INTAKE_LEFT), new WPI_TalonSRX(RobotMap.CAN.INTAKE_RIGHT));
 		oi = new OI();
-		chooser.addObject("Switch/Scale Right", new CubeToSwitchOrScaleAutoR());
-		chooser.addDefault("Switch/Scale Left", new CubeToSwitchOrScaleAutoL());
+		chooser.addObject("Switch Right", new SwitchRight());
+		chooser.addDefault("Switch Left", new SwitchLeft());
+		chooser.addObject("Scale Right", new ScaleRight());
+		chooser.addDefault("Scale Left", new ScaleLeft());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 
