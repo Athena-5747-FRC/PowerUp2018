@@ -16,6 +16,7 @@ public class OI {
 	private XboXUID driver = new XboXUID(0);
 	private XboXUID operator = new XboXUID(1);
 	private Button FlipIntake;
+	private Button FlipIntakeOpp;
 	private Button Intake;
 	private Button Outtake;
 	private Button Holdinair;
@@ -23,11 +24,13 @@ public class OI {
 		operatorButtons();
 	}
 	public void operatorButtons() {
-		FlipIntake = operator.getYellowButton();
-		Intake = operator.getGreenButton();
-		Outtake = operator.getRedButton();
+		FlipIntake = operator.getLbButton();
+		FlipIntakeOpp = operator.getRbButton();
+		Intake = operator.getRedButton();
+		Outtake = operator.getGreenButton();
 		Holdinair = operator.getBlueButton();
-		FlipIntake.whileHeld(new MoveLimitedSubsystem(Robot.flipcube, FlipCube.FLIP_SPEED));
+		FlipIntake.whileHeld(new MoveLimitedSubsystem(Robot.flipcube, FlipCube.MINUS_FLIP));
+		FlipIntakeOpp.whileHeld(new MoveLimitedSubsystem(Robot.flipcube, FlipCube.FLIP_SPEED));
 		Intake.whileHeld(new MoveLimitedSubsystem(Robot.intakecube, IntakeCube.INTAKE));
 		Outtake.whileHeld(new MoveLimitedSubsystem(Robot.intakecube, IntakeCube.OUTTAKE));
 		Holdinair.toggleWhenPressed(new MoveLimitedSubsystem(Robot.elevator, Elevator.ELEVATOR_SPEED));

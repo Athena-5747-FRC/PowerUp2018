@@ -7,11 +7,11 @@ import com.spikes2212.genericsubsystems.drivetrains.commands.DriveArcade;
 /**
  *
  */
-public class DriveToSwitch extends DriveArcade {
+public class DriveAuto extends DriveArcade {
 	
 	public static final int ENCODER_VALUE = 4000; 
 	private Drivetrain drivetrain;
-    public DriveToSwitch(Drivetrain drivetrain, double moveValue, double rotateValue) {
+    public DriveAuto(Drivetrain drivetrain, double moveValue, double rotateValue) {
         super(drivetrain,moveValue, rotateValue);
         this.drivetrain = drivetrain;
     }

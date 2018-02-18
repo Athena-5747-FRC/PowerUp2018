@@ -13,18 +13,18 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class SwitchLeft extends CommandGroup {
+public class SwitchPlusScaleLeft extends CommandGroup {
 	String gameData = DriverStation.getInstance().getGameSpecificMessage();
 	public static final double FORWARD_SPEED = 0.5;
 	public static final double ELEVATOR_SPEED = 0.5;
 	public static final double HOLDINTHEAIR = 0.1;
-    public SwitchLeft() {
+    public SwitchPlusScaleLeft() {
         if (gameData.length() > 0 && gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R')
         {
         	addSequential(new DriveAuto(Robot.drivetrain, 0 , FORWARD_SPEED), 3);
         	addSequential(new ElevatorAuto(Robot.elevator, ELEVATOR_SPEED), 4);
             addParallel(new ElevatorAuto(Robot.elevator, HOLDINTHEAIR ));
-            addSequential(new MoveLimitedSubsystem(Robot.intakecube, IntakeCube.OUTTAKE));
+            addSequential(new MoveLimitedSubsystem(Robot.intakecube, IntakeCube.OUTTAKE),0.5);
         }
         else if (gameData.length() > 0 && gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L')
         {
@@ -32,18 +32,23 @@ public class SwitchLeft extends CommandGroup {
         	addSequential(new DriveAuto(Robot.drivetrain, 0 , FORWARD_SPEED), 2);
         	addSequential(new ElevatorAuto(Robot.elevator, ELEVATOR_SPEED), 4);
             addParallel(new ElevatorAuto(Robot.elevator, HOLDINTHEAIR ));
-            addSequential(new MoveLimitedSubsystem(Robot.intakecube, IntakeCube.OUTTAKE));
+            addSequential(new MoveLimitedSubsystem(Robot.intakecube, IntakeCube.OUTTAKE),0.5);
         }
         else if (gameData.length() > 0 && gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L')
         {
         	addSequential(new DriveAuto(Robot.drivetrain, 0 , FORWARD_SPEED), 3);
+        	addSequential(new ElevatorAuto(Robot.elevator, ELEVATOR_SPEED), 3);
+            addSequential(new MoveLimitedSubsystem(Robot.intakecube, IntakeCube.OUTTAKE),0.5);
+            addSequential(new DriveAuto(Robot.drivetrain, -FORWARD_SPEED, 0),3);
+        	addSequential(new DriveAuto(Robot.drivetrain, 0 , FORWARD_SPEED), 2);
         	addSequential(new ElevatorAuto(Robot.elevator, ELEVATOR_SPEED), 4);
             addParallel(new ElevatorAuto(Robot.elevator, HOLDINTHEAIR ));
-            addSequential(new MoveLimitedSubsystem(Robot.intakecube, IntakeCube.OUTTAKE));
+            addSequential(new MoveLimitedSubsystem(Robot.intakecube, IntakeCube.OUTTAKE),0.5);
         }
         else
         {
-        	addSequential(new DriveAuto(Robot.drivetrain, 0 , FORWARD_SPEED), 3);
+        	addSequential(new DriveAuto(Robot.drivetrain, FORWARD_SPEED , 0), 3);
+        	
         }
         
     }

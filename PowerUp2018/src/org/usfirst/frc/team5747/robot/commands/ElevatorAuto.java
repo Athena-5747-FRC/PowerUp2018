@@ -7,10 +7,10 @@ import com.spikes2212.genericsubsystems.commands.MoveLimitedSubsystem;
 /**
  *
  */
-public class ElevatorToSwitch extends MoveLimitedSubsystem {
+public class ElevatorAuto extends MoveLimitedSubsystem {
 	public static final int ENCODER_VALUE = 2000;
 	private Elevator subsystem;
-    public ElevatorToSwitch(Elevator subsystem, double speed) {
+    public ElevatorAuto(Elevator subsystem, double speed) {
         super(subsystem,speed);
         this.subsystem = subsystem;
     }
