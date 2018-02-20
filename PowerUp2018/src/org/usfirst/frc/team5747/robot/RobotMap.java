@@ -31,11 +31,13 @@ public class RobotMap {
 	{
 		public static final int DRIVETRAIN1_ENCODER_A = 1;
 		public static final int DRIVETRAIN1_ENCODER_B = 2;
-		public static final int ELEVATOR_MIN = 3;
-		public static final int ELEVATOR_MAX = 4;
 		public static final int ELEVATOR_ENCODER_A = 5;
 		public static final int ELEVATOR_ENCODER_B = 6;
 		public static final int DRIVETRAIN2_ENCODER_A = 7;
 		public static final int DRIVETRAIN2_ENCODER_B = 8;
+	}
+	public interface USB
+	{
+		public static final int CAMERA = 0;
 	}
 }

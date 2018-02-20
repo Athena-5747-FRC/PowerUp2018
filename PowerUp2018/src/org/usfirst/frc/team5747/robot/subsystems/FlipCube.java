@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.SpeedController;
  *
  */
 public class FlipCube extends LimitedSubsystem {
-	public static final double FLIP_SPEED = 1;
-	public static final double MINUS_FLIP = -1;
+	public static final double FLIP_SPEED = -0.8;
+	public static final double HOLD_FLIP = -0.1;
     private SpeedController motor;
     
     public FlipCube (SpeedController motor)
@@ -18,8 +18,6 @@ public class FlipCube extends LimitedSubsystem {
     	this.motor = motor;
     }
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
 
 	@Override

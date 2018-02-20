@@ -10,8 +10,8 @@ public class XboXUID extends Joystick {
 	static final int X_LEFT = 0;
 	static final int Y_RIGHT = 5; 
 	static final int Y_LEFT = 1; 
-	static final int INTAKE_LEFT = 2;
-	static final int INTAKE_RIGHT = 3;
+	static final int FLIP_LEFT = 2;
+	static final int FLIP_RIGHT = 3;
 	
 
 	public XboXUID(int port) {
@@ -58,8 +58,8 @@ public class XboXUID extends Joystick {
 	public double getRightY() {
 		return getRawAxis(Y_RIGHT);
 	}
-	public double getRightIntake() {
-		return getRawAxis(INTAKE_RIGHT);
+	public double getRightFlip() {
+		return getRawAxis(FLIP_RIGHT);
 	}
 
 	public double getLeftX() {
@@ -69,8 +69,8 @@ public class XboXUID extends Joystick {
 	public double getLeftY() {
 		return getY(); // Don't change this, for some reason it works
 	}
-	public double getLeftIntake() {
-		return getRawAxis(INTAKE_LEFT);
+	public double getLeftFlip() {
+		return getRawAxis(FLIP_LEFT);
 	}
 	
 

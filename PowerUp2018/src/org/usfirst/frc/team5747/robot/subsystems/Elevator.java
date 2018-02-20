@@ -18,11 +18,9 @@ public class Elevator extends LimitedSubsystem {
     private SpeedController motor;
     private DigitalInput min, max;
     private Encoder encoder;
-    public Elevator(SpeedController motor,DigitalInput min,DigitalInput max,Encoder encoder)
+    public Elevator(SpeedController motor,Encoder encoder)
     {
-    	this.motor = motor; //if motor speed is positive - Up (to max) if not, invert the motor.
-    	this.min = min; //Make sure that the DIOs are true while held.
-    	this.max = max;
+    	this.motor = motor; 
     	this.encoder = encoder;
     }
     public void initDefaultCommand() {
@@ -37,12 +35,12 @@ public class Elevator extends LimitedSubsystem {
 
 	@Override
 	public boolean isMax() {
-		return max.get();
+		return false;
 	}
 
 	@Override
 	public boolean isMin() {
-		return min.get();
+		return false;
 	}
 
 	@Override
