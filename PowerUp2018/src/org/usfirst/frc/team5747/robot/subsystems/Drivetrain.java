@@ -30,14 +30,12 @@ public class Drivetrain extends TankDrivetrain {
 
 	@Override
 	public PIDSource getLeftPIDSource() {
-		// TODO Auto-generated method stub
-		return null;
+		return leftEncoder;
 	}
 
 	@Override
 	public PIDSource getRightPIDSource() {
-		// TODO Auto-generated method stub
-		return null;
+		return rightEncoder;
 	}
 
 	@Override

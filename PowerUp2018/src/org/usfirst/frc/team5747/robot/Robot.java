@@ -7,12 +7,7 @@
 
 package org.usfirst.frc.team5747.robot;
 
-import org.usfirst.frc.team5747.robot.commands.commandgroups.ScaleLeft;
-import org.usfirst.frc.team5747.robot.commands.commandgroups.ScaleRight;
-import org.usfirst.frc.team5747.robot.commands.commandgroups.SwitchLeft;
-import org.usfirst.frc.team5747.robot.commands.commandgroups.SwitchPlusScaleLeft;
-import org.usfirst.frc.team5747.robot.commands.commandgroups.SwitchPlusScaleRight;
-import org.usfirst.frc.team5747.robot.commands.commandgroups.SwitchRight;
+import org.usfirst.frc.team5747.robot.auto.routines;
 import org.usfirst.frc.team5747.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5747.robot.subsystems.Elevator;
 import org.usfirst.frc.team5747.robot.subsystems.FlipCube;
@@ -22,13 +17,11 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.spikes2212.utils.CamerasHandler;
 import com.spikes2212.utils.DoubleSpeedcontroller;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -38,7 +31,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-	public static String gameData;
+	public static String gameData = "";
 	public static IntakeCube intakecube;
 	public static FlipCube flipcube;
 	public static Drivetrain drivetrain;
@@ -47,7 +40,7 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	public static SendableChooser<String> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -61,21 +54,18 @@ public class Robot extends TimedRobot {
 				new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.DRIVE_RIGHT_1),
 						(new DoubleSpeedcontroller(new WPI_TalonSRX(RobotMap.CAN.DRIVE_RIGHT_2), new WPI_TalonSRX(RobotMap.CAN.DRIVE_RIGHT_3)))), new Encoder(RobotMap.DIO.DRIVETRAIN1_ENCODER_A, RobotMap.DIO.DRIVETRAIN1_ENCODER_B), new Encoder(RobotMap.DIO.DRIVETRAIN2_ENCODER_A, RobotMap.DIO.DRIVETRAIN2_ENCODER_B));
 		elevator = new Elevator(
-				new WPI_TalonSRX(RobotMap.CAN.ELEVATOR),
-				new Encoder(RobotMap.DIO.ELEVATOR_ENCODER_A, RobotMap.DIO.ELEVATOR_ENCODER_B));
+				new WPI_TalonSRX(RobotMap.CAN.ELEVATOR));
 		flipcube = new FlipCube(new WPI_TalonSRX(RobotMap.CAN.FLIP));
 		intakecube = new IntakeCube(new WPI_TalonSRX(RobotMap.CAN.INTAKE_LEFT), new WPI_TalonSRX(RobotMap.CAN.INTAKE_RIGHT));
-		camerashandler = new CamerasHandler(640, 360, RobotMap.USB.CAMERA);
-		camerashandler.setExposure(47);
-
+		/*camerashandler = new CamerasHandler(640, 360, RobotMap.USB.CAMERA);
+		camerashandler.setExposure(47);*/
+		
 		oi = new OI();
-		chooser.addObject("Switch Right", new SwitchRight());
-		chooser.addDefault("Switch Left", new SwitchLeft());
-		chooser.addObject("Switch + Scale Right", new SwitchPlusScaleRight());
-		chooser.addObject("Switch + Scale Left", new SwitchPlusScaleLeft());
-		chooser.addObject("Scale Right", new ScaleRight());
-		chooser.addDefault("Scale Left", new ScaleLeft());
-		SmartDashboard.putData("Auto mode", chooser);
+		/*chooser.addObject("Right", "1");
+		chooser.addDefault("Left", "2");
+		chooser.addObject("Middle", "3");
+		
+		SmartDashboard.putData("choose!", chooser);*/
 	}
 
 	/**
@@ -107,12 +97,17 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		/*
 		autonomousCommand = chooser.getSelected();
+		
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
+		*/
+		
+		routines.straight();
+		//left.execute();
 	}
 
 	/**
@@ -121,6 +116,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+	
+		
+		
 	}
 
 	@Override
