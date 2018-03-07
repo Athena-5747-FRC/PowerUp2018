@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-/*public class Right extends CommandGroup {
+public class Right extends CommandGroup {
 	public static final double FORWARD_SPEED = 0.5;
 	public static final double ELEVATOR_SPEED = 0.5;
 	public static final double HOLDINTHEAIR = 0.1;
@@ -104,4 +104,3 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
         
     }
 
-*/

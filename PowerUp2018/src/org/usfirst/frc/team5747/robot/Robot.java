@@ -8,6 +8,9 @@
 package org.usfirst.frc.team5747.robot;
 
 import org.usfirst.frc.team5747.robot.auto.routines;
+import org.usfirst.frc.team5747.robot.commands.commandgroups.Left;
+import org.usfirst.frc.team5747.robot.commands.commandgroups.Line;
+import org.usfirst.frc.team5747.robot.commands.commandgroups.Right;
 import org.usfirst.frc.team5747.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5747.robot.subsystems.Elevator;
 import org.usfirst.frc.team5747.robot.subsystems.FlipCube;
@@ -17,11 +20,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.spikes2212.utils.CamerasHandler;
 import com.spikes2212.utils.DoubleSpeedcontroller;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -40,7 +45,7 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 
 	Command autonomousCommand;
-	public static SendableChooser<String> chooser = new SendableChooser<>();
+	public static SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -61,11 +66,11 @@ public class Robot extends TimedRobot {
 		camerashandler.setExposure(47);*/
 		
 		oi = new OI();
-		/*chooser.addObject("Right", "1");
-		chooser.addDefault("Left", "2");
-		chooser.addObject("Middle", "3");
+		chooser.addObject("Right", new Right());
+		chooser.addDefault("Left", new Left());
+		chooser.addObject("Middle",new Line());
 		
-		SmartDashboard.putData("choose!", chooser);*/
+		SmartDashboard.putData("choose!", chooser);
 	}
 
 	/**
@@ -81,6 +86,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
 	}
 
 	/**
@@ -97,16 +103,15 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		/*
+		
 		autonomousCommand = chooser.getSelected();
 		
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
-		*/
 		
-		routines.straight();
+		//routines.straight();
 		//left.execute();
 	}
 

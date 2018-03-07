@@ -9,10 +9,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-/*public class Line extends CommandGroup {
+public class Line extends CommandGroup {
 	public static final double FORWARD_SPEED = 0.8;
     public Line() {
     	addSequential(new DriveArcade(Robot.drivetrain, FORWARD_SPEED ,0 ), 0.7);
     }
 }
-*/
